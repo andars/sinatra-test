@@ -1,0 +1,11 @@
+<h1> AndarsWeb </h1>
+<% if is_user? %>
+	<h3> Welcome, <%= @user.username %> </h3>
+<% else %>
+    <p><a href='/login'> Login </a></p>
+<% end %>
+
+<p><a href='/users'> User List </a></p>
+<p><a href='/files'> File List </a></p>
+<p><a href='/upload'> Upload File </a></p>
+
