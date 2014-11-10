@@ -43,7 +43,8 @@ class App < Sinatra::Application
 		@user.password = params[:user][:password].to_s
 		p @user
 		@user.save
-		redirect to '/login'
+		session[:id] = @user.id
+		redirect to '/'
 	end
 	
 	get '/sweg' do
