@@ -1,3 +1,5 @@
+require 'date'
+
 class App < Sinatra::Application
   	get '/upload', :auth => false do 
   		@page_title = 'Upload File'
@@ -5,7 +7,7 @@ class App < Sinatra::Application
   	end
   	post '/upload' do
   		file_info = params['file'][:filename].split '.'
-  		@file = AppFile.new(filename: params['file'][:filename], extension: file_info.last)
+  		@file = AppFile.new(filename: params['file'][:filename], extension: file_info.last, created_time: Time.now)
   		File.open('uploads/' + params['file'][:filename], 'w') do |fil|
   			fil.write(params['file'][:tempfile].read)
   		end
@@ -14,7 +16,7 @@ class App < Sinatra::Application
 	end
 
 	get '/files' do
-		@files = AppFile.all
+		@files = AppFile.order(Sequel.desc(:id))
 		erb :files
 	end
 

@@ -3,6 +3,7 @@ unless DB.table_exists?(:files)
 		primary_key :id
 		string :filename
 		string :extension
+		Time :created_time
 		foreign_key :user_id, :users
 	end
 end
