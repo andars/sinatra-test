@@ -4,6 +4,12 @@ body {
 a > button {
 	color: black;
 }
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
 .flash {
 	font-size: 120%;
 	text-align: center;
