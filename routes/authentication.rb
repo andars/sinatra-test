@@ -12,10 +12,21 @@ class App < Sinatra::Application
 			session[:id] = @user.id
 			redirect to '/files'
 		else
-			puts "unsuccessful login by #{@user.username}"
+			flash[:error] = 'Username or password incorrect'
+			puts "unsuccessful login by #{username}"
 			redirect to '/login'
 		end
 	end
+	
+	get '/logout' do
+		erb :logout
+	end
+
+	post '/logout' do
+		session[:id] = nil
+		redirect to '/'
+	end
+
 	get '/session' do
 		@user = User.find(id: session[:id].to_i)
 		@user.username

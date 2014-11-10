@@ -1,7 +1,10 @@
 require 'sinatra/base'
+require 'sinatra/flash'
 
 class App < Sinatra::Application
 	enable :sessions
+	register Sinatra::Flash
+
 	set :session_secret, '' #enter secret here
     set :show_exceptions, false
     set :environment, :production
@@ -9,7 +12,7 @@ class App < Sinatra::Application
 		@user = User.find(id: session[:id].to_i)
 	end
 
-    set(:auth) do 
+    set(:auth) do |arg| 
         condition do
             unless is_user? 
                 redirect "/login", 303

@@ -1,1 +1,24 @@
+body {
+	padding: 1%;
+}
+a > button {
+	color: black;
+}
+.flash {
+	font-size: 120%;
+	text-align: center;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	margin-bottom: 5px;
+}
+
+.flash.error {
+	background-color: #e00;
+}
+
+input {
+	display: block;
+}
+
+
 
