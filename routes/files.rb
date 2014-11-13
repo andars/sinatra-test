@@ -44,6 +44,9 @@ class App < Sinatra::Application
 
 	get '/view/:id' do
 		@file = AppFile[params[:id].to_i]
+		
+		halt 404 if @file.nil?
+		
 		erb :layout do
 			erb :file do
 				if ['jpeg','jpg','gif','png'].member? @file.extension
