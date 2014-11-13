@@ -32,7 +32,11 @@ class App < Sinatra::Application
 		@users = User.all
 		erb :users
 	end
-
+	
+	not_found do
+		status 404
+		erb "404".to_sym
+	end
 =begin
 	get '/new' do
 		@page_title = 'New User'
