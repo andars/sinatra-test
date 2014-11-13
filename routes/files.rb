@@ -1,10 +1,12 @@
 require 'date'
 
 class App < Sinatra::Application
+
   	get '/upload', :auth => false do 
   		@page_title = 'Upload File'
   		erb :upload
   	end
+  	
   	post '/upload' do
   		file_info = params['file'][:filename].split '.'
   		@file = AppFile.new(filename: params['file'][:filename], extension: file_info.last, created_time: Time.now)
@@ -18,6 +20,26 @@ class App < Sinatra::Application
 	get '/files' do
 		@files = AppFile.order(Sequel.desc(:id))
 		erb :files
+	end
+
+	get '/file/:name' do
+		send_file File.join('./uploads', params[:name])
+	end
+	
+	get '/file/:id/delete' do
+		erb :delete
+	end
+
+	post '/file/:id/delete' do
+		@file = AppFile[params[:id]]
+		if @file.nil?
+			flash[:error] = "The file you attempted to delete was not found"
+			redirect to('/files')
+		end
+		path = File.join('./uploads', @file.filename)
+		File.delete(path)
+		@file.delete
+		redirect to('/files')
 	end
 
 	get '/view/:id' do
@@ -34,7 +56,4 @@ class App < Sinatra::Application
 		end
 	end
 
-	get '/file/:name' do
-		send_file File.join('./uploads', params[:name])
-	end
 end

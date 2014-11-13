@@ -1,6 +1,9 @@
 <ul>
 	<% @files.each do |file| %>
-	<li><a href='/view/<%= file.id %>'> <%= file.filename%> </a> - <%= file.user.username %> - <%= file.created_time %></li>
+		<li>
+			<a href='/view/<%= file.id %>'> <%= file.filename%> </a> - <%= file.user.username %> - <%= file.created_time %>
+			<a href='/file/<%= file.id %>/delete'> Delete </a>	
+		</li>
 	<% end %>
 </ul>
 <a href='/upload'> Upload file </a>
