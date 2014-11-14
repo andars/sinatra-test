@@ -1,7 +1,7 @@
 <ul>
 	<% @files.each do |file| %>
 		<li>
-			<a href='/view/<%= file.id %>'> <%= file.filename%> </a> - <%= file.user.username %> - <%= file.created_time %>
+			<a href='/view/<%= file.id %>'> <%= file.filename%> </a> - <%= file.user.username %> - <%= file.created_time.strftime("%m/%d/%y at %l:%M %P") %>
 			<a href='/file/<%= file.id %>/delete'> Delete </a>	
 		</li>
 	<% end %>
