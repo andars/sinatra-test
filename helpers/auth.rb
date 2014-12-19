@@ -1,5 +1,5 @@
 module Auth
-	def is_user?
-		@user != nil
-	end
+  def is_user?
+    @user != nil
+  end
 end

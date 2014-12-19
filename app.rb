@@ -6,24 +6,25 @@ class App < Sinatra::Application
 	register Sinatra::Flash
 
 	set :session_secret, '' #enter secret here
-    set :show_exceptions, false
-    set :environment, :production
+  set :show_exceptions, false
+  set :environment, :production
 	before do
 		@user = User.find(id: session[:id].to_i)
 	end
 
-    set(:auth) do |arg| 
-        condition do
-            unless is_user? 
-                redirect "/login", 303
-            end
-        end
+  set(:auth) do |arg| 
+    condition do
+      unless is_user? 
+        redirect "/login", 303
+      end
     end
-    
-    error Sinatra::NotFound do
-      content_type 'text/plain'
-      [404, 'Not Found']
-    end
+  end
+  
+  error Sinatra::NotFound do
+    content_type 'text/plain'
+    [404, 'Not Found']
+  end
+
 	get '/' do
 		erb :index
 	end
